@@ -14,5 +14,5 @@
 // Gera arquivos .txt com nomes aleatórios
 void gerador_arquivos(int quantidade);
 int gerador_nome_rand(void);
-
+int criador_arquivo(int num);
 #endif

@@ -1,18 +1,18 @@
-#include <arquivo.h>
-#include <arvore.h>
-#include <locale.h>
+#include "arquivo.h"
+#include "arvore.h"
+#include "locale.h"
 
-int main(void)
-{
-    srand(time(NULL));
+int main(void) {
+	criador_arquivo(123);	
+    /*srand(time(NULL));
 
     // Define a língua portuguesa como local
     setlocale(LC_ALL, "Portuguese");
 
-    /*// Teste de gerador randômico
+    //// Teste de gerador randômico
     for(i = 0; i < 10; i++) {
         printf("%d\n", gerador_nome_rand());
-    }*/
+    //}*
 
     // Teste de inserção e busca
     no *arv = NULL;
@@ -29,6 +29,6 @@ int main(void)
     ab = busca(arv, rand);
     printf("\n\nBusca: %d\n\n", ab->nome);
 
-    return 0;
+    return 0;*/
 }
 

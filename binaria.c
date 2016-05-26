@@ -1,5 +1,5 @@
-#include <arvore.h>
-#include <arquivo.h>
+#include "arvore.h"
+#include "arquivo.h"
 
 int arvore_vazia(no *arvore)
 {
