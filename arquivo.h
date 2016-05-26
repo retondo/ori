@@ -7,12 +7,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 // Define o intervalo de números randômicos
 #define RRAND 10000
 
 // Gera arquivos .txt com nomes aleatórios
-void gerador_arquivos(int quantidade);
 int gerador_nome_rand(void);
-int criador_arquivo(int num);
+void criador_arquivo(int num);
 #endif
