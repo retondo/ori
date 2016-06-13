@@ -9,5 +9,6 @@ SOURCES += main.c \
 
 HEADERS += \
     arquivo.h \
-    arvore.h
+    binaria.h \
+    avl.h
 

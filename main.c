@@ -1,5 +1,5 @@
 #include "arquivo.h"
-#include "arvore.h"
+#include "binaria.h"
 #include "locale.h"
 
 int main(void) {
@@ -34,8 +34,8 @@ int main(void) {
     imprimir(arv);
 
     ab = busca(arv, rand);
-    printf("\n\nBusca: %d\n\n", ab->nome);
+    printf("\n\nBusca: %d\n\n", ab->nome);*/
 
-    return 0;*/
+    return 0;
 }
 

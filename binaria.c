@@ -1,37 +1,45 @@
-#include "arvore.h"
+#include "binaria.h"
 #include "arquivo.h"
 
-int arvore_vazia(no *arvore)
+// Retorna um ponteiro de uma aŕvore com espaço alocado dinâmicamente
+no_bin *arv_bin_aloc()
+{
+    no_bin *a = (no_bin *) malloc(sizeof(no_bin));
+    return a;
+}
+
+// Verifica se a árvore está vazia
+int arv_vazia(no_bin *arvore)
 {
     return arvore == NULL;
 }
 
 // Faz busca de um nó na árvore
-no *busca(no *arvore, int numero)
+no_bin *arv_bin_buscar(no_bin *arvore, int valor)
 {
-    if (!arvore_vazia(arvore)) {
-        if (numero == arvore->nome)
+    if (!arv_vazia(arvore)) {
+        if (valor == arvore->nome)
             return arvore;
-        else if (numero < arvore->nome)
-            busca(arvore->esq, numero);
-        else if (numero > arvore->nome)
-            busca(arvore->dir, numero);
-        else
-            return NULL;
+        else if (valor < arvore->nome)
+            return arv_bin_buscar(arvore->esq, valor);
+        else if (valor > arvore->nome)
+            return arv_bin_buscar(arvore->dir, valor);
     }
+
+    return NULL;
 }
 
 // Função recursiva para inserção de um nó na árvore
-no *inserir(no *arvore, int novo)
+no_bin *arv_bin_inserir(no_bin *arvore, int valor)
 {
-    if (arvore_vazia(arvore)) {
-        arvore = (no *) malloc(sizeof(no));
+    if (arv_vazia(arvore)) {
+        arvore = (no_bin *) malloc(sizeof(no_bin));
         arvore->dir = arvore->esq = NULL;
-        arvore->nome = novo;
-    } else if (novo < arvore->nome) {
-        arvore->esq = inserir(arvore->esq, novo);
-    } else if (novo > arvore->nome){
-        arvore->dir = inserir(arvore->dir, novo);
+        arvore->nome = valor;
+    } else if (valor < arvore->nome) {
+        arvore->esq = arv_bin_inserir(arvore->esq, valor);
+    } else if (valor > arvore->nome){
+        arvore->dir = arv_bin_inserir(arvore->dir, valor);
     } else {
         printf("Nó já existe.\n");
     }
@@ -40,65 +48,13 @@ no *inserir(no *arvore, int novo)
 }
 
 // Imprime a árvore em ordem crescente
-void imprimir(no *arvore)
+void arv_imprimir(no_bin *arvore)
 {
-    if (!arvore_vazia(arvore)) {
-        imprimir(arvore->esq);
+    if (!arv_vazia(arvore)) {
+        arv_imprimir(arvore->esq);
         printf("%d\n", arvore->nome);
-        imprimir(arvore->dir);
+        arv_imprimir(arvore->dir);
     }
-}
-
-no *remover(no *arvore, int numero)
-{
-    no *anterior = NULL;
-
-    if (!arvore_vazia(arvore)) {
-        if (numero == arvore->nome) {
-            // Remove a raiz da árvore
-            if (anterior == NULL) {
-                if (!arvore_vazia(arvore->dir))
-                    arvore = arvore->dir;
-                else
-                    arvore = arvore->esq;
-            } else if (anterior->nome < numero) {
-                if (!arvore_vazia(arvore->dir))
-                    arvore = arvore->dir;
-            }
-
-        } else if (numero > arvore->nome) {
-            anterior = remover(arvore->dir, numero);
-        } else if (numero < arvore->nome){
-            anterior = remover(arvore->esq, numero);
-        } else {
-            printf("O elemento %d não existe", numero);
-        }
-    }
-
-    return arvore;
-}
-
-void remover_no_sem_filho(no *anterior, no *atual)
-{
-    anterior = NULL;
-    free(atual);
-}
-
-void remover_no_um_filho(no *anterior, no *atual)
-{
-    if (!arvore_vazia(atual->dir))
-        anterior = atual->dir;
-    else
-        anterior = atual->esq;
-
-    free(atual);
-}
-
-void remover_no_dois_filhos(no *anterior, no *atual)
-{
-    no *aux = NULL;
-
-
 }
 
 
