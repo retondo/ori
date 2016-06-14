@@ -1,6 +1,3 @@
-/* Este cabeçalho contém todas as funçẽos e bibliotecas necessárias para
- * geração de nomes de arquivos randômicos e etc */
-
 #ifndef ARQUIVO_H
 #define ARQUIVO_H
 
@@ -12,11 +9,10 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-// Define o intervalo de números randômicos
-#define RAND 10000
+#define RAND 10000                  // Define o intervalo de números randômicos
 
-// Gera arquivos .txt com nomes aleatórios
-int gerador_nome_rand(void);
-void criador_arquivo(int num);
+int gerador_nome_rand(void);        // Gera números aleatórios
+void criador_arquivo(int num);      /* Gera uma pasta "arquivos" no diretório atual e arquivos txt,
+                                    tendo como nomes os números gerados pela função gerador_nome_rand() */
 
 #endif

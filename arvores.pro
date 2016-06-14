@@ -5,7 +5,8 @@ CONFIG -= qt
 
 SOURCES += main.c \
     binaria.c \
-    arquivo.c
+    arquivo.c \
+    avl.c
 
 HEADERS += \
     arquivo.h \
