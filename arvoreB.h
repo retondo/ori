@@ -1,6 +1,6 @@
 #ifndef ARVOREB_H
 #define ARVOREB_H
-#define MAX_KEYS 5
+#define MAX_KEYS 3
 
 typedef struct NO_B {
     int folha;     // booleano para verificar se é folha
