@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-c -Wall
 LDFLAGS=
-SOURCES=arquivo.h arquivo.c arvore.h binaria.c main.c
+SOURCES=arquivo.h arquivo.c arvoreB.h arvoreB.c avl.h binaria.h binaria.c main.c
 OBJECTS=$(SOURCES:.c=.o)
 EXECUTABLE=proj
 
