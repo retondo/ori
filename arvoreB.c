@@ -48,7 +48,6 @@ int searchKey(int n, int *b, int key) {
             hi = mid;
         }
     }
-	printf("lo = %d, hi = %d, mid = %d\n", lo, hi, mid);
     return hi;
 }
 
@@ -95,7 +94,7 @@ arvoreB inserir_arvoreBInternal(arvoreB b, int key, int *median) {
 			b->filhos[pos] = criar_arvoreB();
         b2 = inserir_arvoreBInternal(b->filhos[pos], key, &mid);
         
-        if(b2) { puts("+=QUEBRA1+=");
+        if(b2) {
 
             memmove(&b->keys[pos+1], &b->keys[pos], sizeof(*(b->keys)) * (b->nkeys - pos));
             // novo nó entra em pos+1
@@ -108,7 +107,6 @@ arvoreB inserir_arvoreBInternal(arvoreB b, int key, int *median) {
     }
 
     // é feito a quebra
-	printf("========%d\n", b->nkeys);
     if(b->nkeys >= MAX_KEYS) {
         mid = b->nkeys/2;
 
@@ -162,7 +160,6 @@ void imprimir_arvoreB (arvoreB b) {
 	//printf("========%d\n", b->nkeys);
     for (i = 0; i < B->nkeys; i++) {
       imprimir_arvoreB (B->filhos[i]);
-      printf ("%d\n", B->keys[i]);
     }
     imprimir_arvoreB (B->filhos[B->nkeys]);
   }
@@ -171,10 +168,13 @@ void imprimir_arvoreB (arvoreB b) {
 
 arvoreB *buscar_arvoreB (arvoreB b, int x) {
   int i;
-  if (b == NULL) return NULL;
+  if (b == NULL) 
+	return NULL;
   for (i = 0; i < b->nkeys && b->keys[i] < x; i++);
-  if (i == b->nkeys) return buscar_arvoreB(b->filhos[i], x);
-  if (b->keys[i] == x) return b;
+  if (i == b->nkeys) 
+	return buscar_arvoreB(b->filhos[i], x);
+  if (b->keys[i] == x) 
+	return b;
   return buscar_arvoreB(b->filhos[i], x);
 }
 
