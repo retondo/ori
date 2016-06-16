@@ -1,4 +1,5 @@
-
+#include <stdio.h>
+#include <stdlib.h>
 #include "binaria.h"
 
 int bin_vazia(no_bin *arvore)
@@ -30,8 +31,6 @@ no_bin *bin_inserir(no_bin *arvore, int valor)
         arvore->esq = bin_inserir(arvore->esq, valor);
     } else if (valor > arvore->info) {
         arvore->dir = bin_inserir(arvore->dir, valor);
-    } else {
-        printf("Nó já existe.\n");
     }
 
     return arvore;

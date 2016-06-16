@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "avl.h"
 
 int aux;
@@ -14,6 +16,20 @@ void avl_imprimir(no_avl *arvore)
         avl_imprimir(arvore->esq);
         avl_imprimir(arvore->dir);
     }
+}
+
+no_avl *avl_buscar(no_avl *arvore, int valor)
+{
+    if (!avl_vazia(arvore)) {
+        if (valor == arvore->info)
+            return arvore;
+        else if (valor < arvore->info)
+            return avl_buscar(arvore->esq, valor);
+        else if (valor > arvore->info)
+            return avl_buscar(arvore->dir, valor);
+    }
+
+    return NULL;
 }
 
 no_avl *avl_inserir(no_avl *arvore_avl, no_avl *pai, int valor)

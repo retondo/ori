@@ -1,9 +1,6 @@
 #ifndef BINARIA_H
 #define BINARIA_H
 
-#include <stdio.h>
-#include <stdlib.h>
-
 typedef struct No_Bin {
     int info;
     struct No_Bin *dir;

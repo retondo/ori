@@ -34,21 +34,21 @@ int main(void) {
 	Tinicial = (float)clock()/CLOCKS_PER_SEC;
 	//inserção em arvore binária
 	for (i = 0; i < quantidade; i++) {
-		arvore = arv_bin_inserir(arvore, vetor[i]);
+        arvore = bin_inserir(arvore, vetor[i]);
 	}
 	Tfinal = (float)clock()/CLOCKS_PER_SEC;
 	Ttotal = Tfinal - Tinicial;
-	printf("Tempo total para inserir na arvore binária: %f\n", Ttotal);
+    printf("Tempo total para inserir na árvore binária: %f\n", Ttotal);
 
 	//Medição de tempo para inserir na árvore avl
 	Tinicial = (float)clock()/CLOCKS_PER_SEC;
 	//inserção em arvore binária
 	for (i = 0; i < quantidade; i++) {
-		arvoreavl = arv_avl_inserir(arvoreavl, arvoreavl, vetor[i]);
+        arvoreavl = avl_inserir(arvoreavl, NULL, vetor[i]);
 	}
 	Tfinal = (float)clock()/CLOCKS_PER_SEC;
 	Ttotal = Tfinal - Tinicial;
-	printf("Tempo total para inserir na arvore avl: %f\n", Ttotal);
+    printf("Tempo total para inserir na árvore avl: %f\n", Ttotal);
 
 	//Medição de tempo para inserir na árvore B
 	Tinicial = (float)clock()/CLOCKS_PER_SEC;
@@ -58,29 +58,29 @@ int main(void) {
 	}
 	Tfinal = (float)clock()/CLOCKS_PER_SEC;
 	Ttotal = Tfinal - Tinicial;
-	printf("Tempo total para inserir na arvore B: %f\n", Ttotal);
+    printf("Tempo total para inserir na árvore B: %f\n", Ttotal);
 
 	//Medição de tempo para busca em árvore binária
 	no_bin *busca;
 	Tinicial = (float)clock()/CLOCKS_PER_SEC;
 	//busca em arvore binária
 	for (i = 0; i < quantidade; i++) {
-		busca = arv_bin_buscar(arvore, vetor[i]);
+        busca = bin_buscar(arvore, vetor[i]);
 	}
 	Tfinal = (float)clock()/CLOCKS_PER_SEC;
 	Ttotal = Tfinal - Tinicial;
-	printf("Tempo total para buscar na arvore binária: %f\n", Ttotal);
+    printf("Tempo total para buscar na árvore binária: %f\n", Ttotal);
 
 	//Medição de tempo para busca em árvore avl
-	/*no_bin *busca;
+    no_avl *buscaavl;
 	Tinicial = (float)clock()/CLOCKS_PER_SEC;
 	//busca em arvore binária
 	for (i = 0; i < quantidade; i++) {
-		busca = arv_bin_buscar(arvore, vetor[i]);
+        buscaavl = avl_buscar(arvoreavl, vetor[i]);
 	}
 	Tfinal = (float)clock()/CLOCKS_PER_SEC;
 	Ttotal = Tfinal - Tinicial;
-	printf("Tempo total para buscar na arvore binária: %f\n", Ttotal);*/
+    printf("Tempo total para buscar na árvore avl: %f\n", Ttotal);
 
 	//Medição de tempo para busca em árvore B
 	arvoreB buscaB;

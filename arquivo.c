@@ -1,3 +1,4 @@
+
 #include "arquivo.h"
 
 // Gera nome (números) de forma randômica com base no tempo
