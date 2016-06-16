@@ -1,15 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <assert.h>
 #include <string.h>
 #include "arvoreB.h"
 
 arvoreB criar_arvoreB(void) {
     arvoreB b;
 
-    b = malloc(sizeof(*b));
-    assert(b);
-
+    b = calloc(4, sizeof(struct NO_B));
     b->folha = 1;
     b->nkeys = 0;
 
@@ -17,9 +14,10 @@ arvoreB criar_arvoreB(void) {
 }
 
 void remover_arvoreB(arvoreB b) {
-    int i;
+	int i;
 
     if(!b->folha) {
+		
         for(i = 0; i < b->nkeys + 1; i++) {
             remover_arvoreB(b->filhos[i]);
         }
@@ -28,32 +26,35 @@ void remover_arvoreB(arvoreB b) {
     free(b);
 }
 
-static int searchKey(int n, const int *a, int key) {
-    int lo;
-    int hi;
-    int mid;
+int searchKey(int n, int *b, int key) {
+    int lo; 
+    int hi; 
+    int mid; 
+	int *a;
+	a = malloc(sizeof(int*));
+	a = b;	
 
     lo = -1;
     hi = n;
-
+	
     while(lo + 1 < hi) {
         mid = (lo+hi)/2;
         if(a[mid] == key) {
             return mid;
         } else if(a[mid] < key) {
             lo = mid;
+			//hi = mid+1;
         } else {
             hi = mid;
         }
     }
-
     return hi;
 }
 
 int procurar_arvoreB(arvoreB b, int key) {
     int pos;
 
-    // verifica se e vazia
+    // verifica se é vazia
     if(b->nkeys == 0) {
         return 0;
     }
@@ -67,11 +68,12 @@ int procurar_arvoreB(arvoreB b, int key) {
     }
 }
 
-static arvoreB inserir_arvoreBInternal(arvoreB b, int key, int *median) {
+arvoreB inserir_arvoreBInternal(arvoreB b, int key, int *median) {
     int pos;
     int mid;
     arvoreB b2;
 
+	//printf("b->nkeys = %d\n", b->nkeys);
     pos = searchKey(b->nkeys, b->keys, key);
 
     if(pos < b->nkeys && b->keys[pos] == key) {
@@ -88,6 +90,8 @@ static arvoreB inserir_arvoreBInternal(arvoreB b, int key, int *median) {
     } else {
 
         // insere um nó filho
+		if(!b->filhos[pos])
+			b->filhos[pos] = criar_arvoreB();
         b2 = inserir_arvoreBInternal(b->filhos[pos], key, &mid);
         
         if(b2) {
@@ -108,7 +112,7 @@ static arvoreB inserir_arvoreBInternal(arvoreB b, int key, int *median) {
 
         *median = b->keys[mid];
 
-        b2 = malloc(sizeof(*b2));
+        b2 = malloc(sizeof(struct NO_B));
 
         b2->nkeys = b->nkeys - mid - 1;
         b2->folha = b->folha;
@@ -119,9 +123,10 @@ static arvoreB inserir_arvoreBInternal(arvoreB b, int key, int *median) {
         }
 
         b->nkeys = mid;
-
+		//puts("=Quebra=");
         return b2;
     } else {
+		//puts("+nada+");
         return 0;
     }
 }
@@ -133,10 +138,9 @@ void inserir_arvoreB(arvoreB b, int key) {
 
     b2 = inserir_arvoreBInternal(b, key, &median);
 
-    if(b2) {
+    if(b2) { //puts("+=QUEBRA+=");
 
         b1 = malloc(sizeof(*b1));
-        assert(b1);
 
         memmove(b1, b, sizeof(*b));
 
@@ -150,22 +154,27 @@ void inserir_arvoreB(arvoreB b, int key) {
 
 void imprimir_arvoreB (arvoreB b) {
   int i;
-  if (b != NULL) {
-    for (i = 0; i < b->nkeys; i++) {
-      imprimir_arvoreB (b->filhos[i]);
-      printf ("%d\n", b->keys[i]);
+	arvoreB B = criar_arvoreB();
+	B = b;
+  if (B != NULL) {
+	//printf("========%d\n", b->nkeys);
+    for (i = 0; i < B->nkeys; i++) {
+      imprimir_arvoreB (B->filhos[i]);
     }
-    imprimir_arvoreB (b->filhos[b->nkeys]);
+    imprimir_arvoreB (B->filhos[B->nkeys]);
   }
 }
 
 
 arvoreB *buscar_arvoreB (arvoreB b, int x) {
   int i;
-  if (b == NULL) return NULL;
+  if (b == NULL) 
+	return NULL;
   for (i = 0; i < b->nkeys && b->keys[i] < x; i++);
-  if (i == b->nkeys) return buscar_arvoreB(b->filhos[i], x);
-  if (b->keys[i] == x) return b;
+  if (i == b->nkeys) 
+	return buscar_arvoreB(b->filhos[i], x);
+  if (b->keys[i] == x) 
+	return b;
   return buscar_arvoreB(b->filhos[i], x);
 }
 
