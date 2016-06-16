@@ -6,10 +6,12 @@ CONFIG -= qt
 SOURCES += main.c \
     binaria.c \
     arquivo.c \
-    avl.c
+    avl.c \
+    arvoreB.c
 
 HEADERS += \
     arquivo.h \
     binaria.h \
-    avl.h
+    avl.h \
+    arvoreB.h
 
